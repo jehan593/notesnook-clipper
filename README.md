@@ -48,6 +48,6 @@ The board is scoped per browser tab and resets automatically if you navigate to 
 
 ## Limitations
 
-- Images are saved by reference (`<img src="...">` pointing at the original URL), not downloaded/embedded. If the source image later goes offline or requires auth, it won't display in Notesnook.
+- Images are saved by reference (`<img src="...">` pointing at the original URL). The Notesnook editor automatically downloads and re-attaches these as local encrypted attachments the first time you open the note, so this is normally transparent. If the source image goes offline or requires auth *before* the note is ever opened, that download fails silently and the image is permanently lost.
 - The Inbox API only creates new notes — there's no way to append to an existing note, so each save is always a new note.
 - Requires Chrome/Edge (Manifest V3). Not tested on Firefox.
