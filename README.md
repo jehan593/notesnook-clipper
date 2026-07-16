@@ -26,6 +26,8 @@ Right-click text or images on any page to collect them into a per-tab "board." W
 3. Open the extension's options page (click the ⚙ icon in the popup, or right-click the extension icon → Options) and paste the key in.
 4. Optional: create a tag (e.g. `web-clipper`) in Notesnook, right-click it → **Copy ID**, and paste the ID into the options page. Every note this extension creates will be tagged with it.
 
+> **Note on API key storage**: the Inbox API key is saved via `chrome.storage.local`, which is not encrypted at rest — it's kept in plaintext in your browser profile, readable by anything with local access to that profile (e.g. malware, another OS user). This is standard for browser extensions (there's no OS keychain API available to them), but treat the key accordingly: it should only ever have inbox/write access, and you can revoke or rotate it from your Notesnook account settings at any time.
+
 ## Usage
 
 1. Select text on a page and right-click → **Add selection to Notesnook board**, or **Use selection as note title**.
