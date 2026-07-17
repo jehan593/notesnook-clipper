@@ -23,6 +23,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["activeTab", "storage", "contextMenus"],
+  "permissions": ["activeTab", "storage", "contextMenus", "scripting"],
   "host_permissions": ["https://inbox.notesnook.com/*"]
 }
