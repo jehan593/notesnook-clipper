@@ -230,10 +230,10 @@ async function save() {
   saveBtn.disabled = true;
   setStatus("Saving...");
 
-  const isLinksNote = boardItems.length === 0 && Boolean(webClipperLinksTagId);
+  const isLinksNote = boardItems.length === 0;
   const tagIds = [];
   if (isLinksNote) {
-    tagIds.push(webClipperLinksTagId);
+    if (webClipperLinksTagId) tagIds.push(webClipperLinksTagId);
   } else if (webClipperTagId) {
     tagIds.push(webClipperTagId);
   }
