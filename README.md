@@ -13,6 +13,7 @@ Right-click text or images on any page to collect them into a per-tab "board." W
 - **Remove** individual items, or **Clear All** to reset the board for the current page.
 - Saving works even with an empty board — it still saves the page link.
 - Every note is tagged (optional) with a tag you configure, e.g. `web-clipper`.
+- Notes saved with an empty board (just the page link, nothing added) are tagged instead with a separate tag you configure, e.g. `links` — if no links tag is configured, they fall back to the `web-clipper` tag.
 
 ## Note format
 
@@ -25,6 +26,7 @@ Right-click text or images on any page to collect them into a per-tab "board." W
 2. Get an Inbox API key from your Notesnook account settings (see the [Inbox API docs](https://help.notesnook.com/inbox-api/getting-started)).
 3. Open the extension's options page (click the ⚙ icon in the popup, or right-click the extension icon → Options) and paste the key in.
 4. Optional: create a tag (e.g. `web-clipper`) in Notesnook, right-click it → **Copy ID**, and paste the ID into the options page. Every note this extension creates will be tagged with it.
+5. Optional: create a second tag (e.g. `links`) in Notesnook, copy its ID the same way, and paste it into the options page as well. Notes saved with an empty board — nothing added, just the page link — will be tagged with it instead of the `web-clipper` tag.
 
 > **Note on API key storage**: the Inbox API key is saved via `chrome.storage.local`, which is not encrypted at rest — it's kept in plaintext in your browser profile, readable by anything with local access to that profile (e.g. malware, another OS user). This is standard for browser extensions (there's no OS keychain API available to them), but treat the key accordingly: it should only ever have inbox/write access, and you can revoke or rotate it from your Notesnook account settings at any time.
 

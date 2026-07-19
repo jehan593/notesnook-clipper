@@ -210,9 +210,10 @@ async function refreshApiKeyStatus() {
 async function save() {
   if (!currentTab) return;
 
-  const { inboxApiKey, webClipperTagId } = await chrome.storage.local.get([
+  const { inboxApiKey, webClipperTagId, webClipperLinksTagId } = await chrome.storage.local.get([
     "inboxApiKey",
     "webClipperTagId",
+    "webClipperLinksTagId",
   ]);
   if (!inboxApiKey) {
     setStatus("Set your Inbox API key first.", "error");
@@ -221,6 +222,13 @@ async function save() {
 
   saveBtn.disabled = true;
   setStatus("Saving...");
+
+  const tagIds = [];
+  if (boardItems.length === 0 && webClipperLinksTagId) {
+    tagIds.push(webClipperLinksTagId);
+  } else if (webClipperTagId) {
+    tagIds.push(webClipperTagId);
+  }
 
   try {
     const response = await fetch(INBOX_URL, {
@@ -238,7 +246,7 @@ async function save() {
           type: "html",
           data: buildContentHtml(),
         },
-        ...(webClipperTagId ? { tagIds: [webClipperTagId] } : {}),
+        ...(tagIds.length ? { tagIds } : {}),
       }),
     });
 
