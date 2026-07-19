@@ -141,8 +141,15 @@ function escapeAttr(str) {
   return str.replace(/"/g, "&quot;");
 }
 
+function formatTimestamp(date) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(
+    date.getHours()
+  )}:${pad(date.getMinutes())}`;
+}
+
 function buildContentHtml() {
-  const timestamp = new Date().toLocaleString();
+  const timestamp = formatTimestamp(new Date());
   const parts = [
     `<p>${escapeHtml(timestamp)} — <a href="${escapeAttr(currentTab.url)}">${escapeHtml(
       currentTab.url
@@ -223,12 +230,17 @@ async function save() {
   saveBtn.disabled = true;
   setStatus("Saving...");
 
+  const isLinksNote = boardItems.length === 0 && Boolean(webClipperLinksTagId);
   const tagIds = [];
-  if (boardItems.length === 0 && webClipperLinksTagId) {
+  if (isLinksNote) {
     tagIds.push(webClipperLinksTagId);
   } else if (webClipperTagId) {
     tagIds.push(webClipperTagId);
   }
+
+  const title = isLinksNote
+    ? `Link - ${currentTab.url}`
+    : `Clipper - ${customTitle || currentTab.title || currentTab.url}`;
 
   try {
     const response = await fetch(INBOX_URL, {
@@ -238,7 +250,7 @@ async function save() {
         Authorization: inboxApiKey,
       },
       body: JSON.stringify({
-        title: customTitle || currentTab.title || currentTab.url,
+        title,
         type: "note",
         source: "notesnook-simple-clipper",
         version: 1,
