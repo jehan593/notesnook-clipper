@@ -235,8 +235,8 @@ async function save() {
   }
 
   const title = isLinksNote
-    ? `Link - ${currentTab.url}`
-    : `Clipper - ${customTitle || currentTab.title || currentTab.url}`;
+    ? `Link: ${currentTab.url}`
+    : `Clipper: ${customTitle || currentTab.title || currentTab.url}`;
 
   try {
     const response = await fetch(INBOX_URL, {
