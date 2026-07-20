@@ -17,10 +17,6 @@ let customTitle = "";
 let dragFromIndex = null;
 let titleSaveTimeout = null;
 
-function boardKey(tabId) {
-  return `board-${tabId}`;
-}
-
 function setStatus(message, kind) {
   statusEl.textContent = message;
   statusEl.className = kind || "";
@@ -169,6 +165,7 @@ function buildContentHtml() {
 async function init() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   currentTab = tab;
+  await refreshApiKeyStatus();
 
   if (!tab || !tab.url || !/^https?:\/\//.test(tab.url)) {
     titleInputEl.value = "This page can't be saved.";
@@ -181,7 +178,6 @@ async function init() {
   await loadBoard();
   renderTitle();
   renderBoard();
-  await refreshApiKeyStatus();
 }
 
 function handleTitleInput() {
