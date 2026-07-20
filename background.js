@@ -1,3 +1,5 @@
+importScripts("common.js");
+
 const MENU_ADD_TEXT = "notesnook-add-text";
 const MENU_ADD_IMAGE = "notesnook-add-image";
 const MENU_SNIP = "notesnook-snip";
@@ -19,10 +21,6 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ["page"],
   });
 });
-
-function boardKey(tabId) {
-  return `board-${tabId}`;
-}
 
 async function getBoard(tab) {
   const key = boardKey(tab.id);
