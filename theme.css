@@ -17,7 +17,13 @@
   --nord15: #b48ead;
   --font-mono: "MartianMono Nerd Font", "MartianMono NF", "Martian Mono",
     ui-monospace, "Cascadia Code", monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
 }
 * {
   box-sizing: border-box;
+}
+:focus-visible {
+  outline: 2px solid var(--nord9);
+  outline-offset: 2px;
 }

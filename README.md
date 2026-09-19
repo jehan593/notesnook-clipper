@@ -1,6 +1,8 @@
 # Notesnook Simple Clipper
 
-A minimal Chrome extension for clipping web pages into [Notesnook](https://notesnook.com) via its [Inbox API](https://help.notesnook.com/inbox-api/getting-started) — built as a simpler alternative to the official web clipper.
+> FYI: This project is fully vibe coded.
+
+A minimal Chrome extension for clipping web pages into [Notesnook](https://notesnook.com) via its [Inbox API](https://help.notesnook.com/inbox-api/getting-started) — a simpler alternative to the official web clipper.
 
 ## What it does
 
@@ -31,7 +33,7 @@ Right-click text, images, or an area of the page to collect them into a per-tab 
 4. Optional: create a tag named `Web-Clipper` in Notesnook, right-click it → **Copy ID**, and paste the ID into the options page. Notes with anything added to the board will be tagged with it.
 5. Optional: create a second tag named `Links` in Notesnook, copy its ID the same way, and paste it into the options page. Notes saved empty — just the page link — will be tagged with it instead.
 
-> **Note on API key storage**: the Inbox API key is saved via `chrome.storage.local`, which is not encrypted at rest — it's kept in plaintext in your browser profile, readable by anything with local access to that profile (e.g. malware, another OS user). This is standard for browser extensions (there's no OS keychain API available to them), but treat the key accordingly: it should only ever have inbox/write access, and you can revoke or rotate it from your Notesnook account settings at any time.
+> **Note on API key storage**: the Inbox API key is stored via `chrome.storage.local` in plaintext in your browser profile — readable by anything with local access (e.g. malware, another OS user). There's no OS keychain API available to extensions, so this is standard, but treat the key accordingly: give it only inbox/write access, and revoke or rotate it from your Notesnook account settings if needed.
 
 ## Usage
 
