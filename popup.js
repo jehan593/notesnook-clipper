@@ -16,6 +16,17 @@ let boardItems = [];
 let customTitle = "";
 let dragFromIndex = null;
 let titleSaveTimeout = null;
+let clearArmed = false;
+let clearDisarmId = null;
+const CLEAR_DISARM_MS = 3000;
+
+function disarmClear() {
+  clearArmed = false;
+  clearTimeout(clearDisarmId);
+  clearBtn.textContent = "Clear All";
+  clearBtn.classList.remove("pending");
+  clearBtn.title = "Remove everything added to this board";
+}
 
 function setStatus(message, kind) {
   statusEl.textContent = message;
@@ -264,7 +275,7 @@ async function save() {
       renderTitle();
       renderBoard();
     } else if (response.status === 401 || response.status === 403) {
-      setStatus("Invalid API key. Check options.", "error");
+      setStatus("Invalid API key. Check settings.", "error");
     } else {
       const body = await response.text();
       setStatus(`Failed to save (${response.status}).`, "error");
@@ -279,7 +290,19 @@ async function save() {
 }
 
 saveBtn.addEventListener("click", save);
-clearBtn.addEventListener("click", clearAll);
+clearBtn.addEventListener("click", () => {
+  if (clearArmed) {
+    disarmClear();
+    clearAll();
+    return;
+  }
+  clearArmed = true;
+  clearBtn.textContent = "Clear all?";
+  clearBtn.classList.add("pending");
+  clearBtn.title = "Click again to confirm";
+  setStatus("This removes everything added to this board.", "warn");
+  clearDisarmId = setTimeout(disarmClear, CLEAR_DISARM_MS);
+});
 optionsLink.addEventListener("click", (e) => {
   e.preventDefault();
   chrome.runtime.openOptionsPage();

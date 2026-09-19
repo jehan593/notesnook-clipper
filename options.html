@@ -14,58 +14,78 @@
         padding: 0 16px;
       }
       h1 {
-        font-size: 17px;
-        color: var(--nord8);
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--nord6);
+        margin: 0 0 4px;
       }
-      p.hint {
+      p.intro {
         font-size: 12px;
         color: var(--nord4);
         line-height: 1.6;
+        margin: 0 0 16px;
       }
-      p.hint code {
+      .card {
         background: var(--nord1);
-        color: var(--nord13);
-        padding: 1px 5px;
-        border-radius: 4px;
+        border-radius: var(--radius);
+        padding: 12px;
+        margin: 12px 0;
       }
       label {
         display: block;
         font-size: 12px;
-        font-weight: 700;
-        margin: 16px 0 6px;
+        font-weight: 600;
+        margin: 0 0 6px;
         color: var(--nord5);
       }
       input[type="password"],
       input[type="text"] {
         width: 100%;
-        padding: 8px 10px;
+        padding: 9px 12px;
         font-family: var(--font-mono);
         font-size: 13px;
-        background: var(--nord1);
+        background: transparent;
         border: 1px solid var(--nord3);
-        border-radius: 6px;
+        border-radius: var(--radius);
         color: var(--nord6);
+      }
+      input[type="password"]::placeholder,
+      input[type="text"]::placeholder {
+        color: var(--nord3);
       }
       input[type="password"]:focus,
       input[type="text"]:focus {
         outline: none;
-        border-color: var(--nord8);
+        border-color: var(--nord9);
+        box-shadow: 0 0 0 2px rgba(129, 161, 193, 0.35);
       }
-      button {
-        margin-top: 14px;
-        padding: 8px 18px;
+      p.hint {
+        font-size: 11px;
+        color: var(--nord4);
+        line-height: 1.6;
+        margin: 8px 0 0;
+      }
+      p.hint code {
+        background: var(--nord2);
+        color: var(--nord13);
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      button#save-btn {
+        width: 100%;
+        margin-top: 16px;
+        padding: 10px;
         font-family: var(--font-mono);
         font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.03em;
+        font-weight: 600;
         border: none;
-        border-radius: 6px;
-        background: var(--nord10);
-        color: var(--nord6);
+        border-radius: var(--radius);
+        background: var(--nord9);
+        color: var(--nord0);
         cursor: pointer;
       }
-      button:hover {
-        background: var(--nord9);
+      button#save-btn:hover {
+        filter: brightness(1.08);
       }
       #status {
         margin-top: 10px;
@@ -83,9 +103,9 @@
   </head>
   <body>
     <h1>Notesnook Simple Clipper</h1>
-    <p class="hint">
-      Create an Inbox API key from your Notesnook account settings, then
-      paste it below. See the
+    <p class="intro">
+      Create an Inbox API key in your Notesnook account settings and paste it
+      below. See the
       <a
         href="https://help.notesnook.com/inbox-api/getting-started"
         target="_blank"
@@ -95,39 +115,41 @@
       for details.
     </p>
 
-    <label for="api-key">Inbox API key</label>
-    <input type="password" id="api-key" placeholder="Paste your API key" />
-
-    <label for="tag-id">"Web-Clipper" tag ID (optional)</label>
-    <input
-      type="text"
-      id="tag-id"
-      placeholder="Right-click the tag in Notesnook → Copy ID"
-    />
-    <p class="hint">
-      Create a tag named <code>Web-Clipper</code> in Notesnook, right-click
-      it, choose "Copy ID", and paste it here. Notes with anything added to
-      the board will be tagged with it. Leave blank to save those notes
-      without a tag.
-    </p>
-
-    <label for="links-tag-id">"Links" tag ID (optional)</label>
-    <input
-      type="text"
-      id="links-tag-id"
-      placeholder="Right-click the tag in Notesnook → Copy ID"
-    />
-    <p class="hint">
-      Create a tag named <code>Links</code> in Notesnook, right-click it,
-      choose "Copy ID", and paste it here. Notes saved without anything added
-      to the board (just the page link) will be tagged with this instead.
-      Leave blank to save those notes without a tag.
-    </p>
-
-    <div>
-      <button id="save-btn">Save</button>
+    <div class="card">
+      <label for="api-key">Inbox API key</label>
+      <input type="password" id="api-key" placeholder="Paste your API key" />
     </div>
-    <p id="status"></p>
+
+    <div class="card">
+      <label for="tag-id">"Web-Clipper" tag ID (optional)</label>
+      <input
+        type="text"
+        id="tag-id"
+        placeholder="Right-click the tag in Notesnook → Copy ID"
+      />
+      <p class="hint">
+        Right-click the <code>Web-Clipper</code> tag in Notesnook, choose "Copy
+        ID", and paste it here. Notes with anything added to the board are
+        tagged with it. Leave blank to save un-tagged.
+      </p>
+    </div>
+
+    <div class="card">
+      <label for="links-tag-id">"Links" tag ID (optional)</label>
+      <input
+        type="text"
+        id="links-tag-id"
+        placeholder="Right-click the tag in Notesnook → Copy ID"
+      />
+      <p class="hint">
+        Right-click the <code>Links</code> tag in Notesnook, choose "Copy ID",
+        and paste it here. Link-only notes are tagged with it. Leave blank to
+        save un-tagged.
+      </p>
+    </div>
+
+    <button id="save-btn">Save</button>
+    <p id="status" role="status"></p>
 
     <script src="options.js"></script>
   </body>

@@ -23,10 +23,11 @@
     transform: "translateX(-50%)",
     padding: "6px 12px",
     background: "#2e3440",
+    border: "1px solid #4c566a",
     color: "#eceff4",
     fontFamily: "ui-monospace, monospace",
     fontSize: "12px",
-    borderRadius: "6px",
+    borderRadius: "8px",
     boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
   });
   overlay.appendChild(hint);
@@ -36,12 +37,11 @@
     position: "fixed",
     boxSizing: "border-box",
     boxShadow: [
-      "inset 0 0 0 1px #000000",
-      "inset 0 0 0 3px #ffffff",
-      "inset 0 0 0 4px #000000",
+      "inset 0 0 0 1px #2e3440",
+      "inset 0 0 0 2px #88c0d0",
       "0 1px 6px rgba(0, 0, 0, 0.6)",
     ].join(", "),
-    background: "rgba(255, 255, 255, 0.12)",
+    background: "rgba(136, 192, 208, 0.12)",
     display: "none",
   });
   overlay.appendChild(box);
